@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import "../styles/AddProduct.css"
+import "../styles/AddProduct.css";
+import { railsApiUrl } from './api'; // importing the api
 
 function AddProduct ({ onProductAdded, setErrorMessage }) { //accepting props
     // state to hold form input values
@@ -26,7 +27,7 @@ function AddProduct ({ onProductAdded, setErrorMessage }) { //accepting props
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4000/products', product); // sending POST request
+            const response = await axios.post(railsApiUrl, product); // sending POST request
             onProductAdded(response.data); // update the product list
             setErrorMessage(''); //Clear the error on succesful addition
             setProduct({

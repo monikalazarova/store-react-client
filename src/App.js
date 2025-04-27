@@ -8,6 +8,7 @@ import ProductDetails from './components/ProductDetails';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import "./App.css";
+import { railsApiUrl } from './components/api';
 
 function App() {
   //local states for managing products, loading, editing and filtering 
@@ -16,12 +17,13 @@ function App() {
   const [editProductId, setEditProductId] = useState(null);
   const [availableFilter, setAvailableFilter] = useState('all');
   const [errorMessage, setErrorMessage] = useState('');
+  
 
   //fetch products 
   useEffect(function () {
     async function fetchProducts() {
         try{
-          const response = await axios.get ('http://localhost:4000/products');
+          const response = await axios.get (railsApiUrl);
           setProducts(response.data);
         } catch (error) {
           console.error ("Could not fetch the products", error);

@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../styles/ProductDetails.css";
+import { railsApiUrl } from "./api";
 
 function ProductDetails() {
     const { id } = useParams(); // getting the product id from the url
@@ -12,7 +13,7 @@ function ProductDetails() {
     useEffect(function() {
         async function fetchProduct() {
             try{
-                const response = await axios.get (`http://localhost:4000/products/${id}`); // GET request
+                const response = await axios.get (`${railsApiUrl}/${id}`); // GET request
                 setProduct(response.data);
             } catch (error) {
                 console.error ("Error fetching a product", error);

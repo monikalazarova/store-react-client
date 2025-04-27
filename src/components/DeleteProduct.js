@@ -1,10 +1,11 @@
 import axios from "axios";
+import { railsApiUrl } from "./api";
 
 function DeleteProduct ({ productId, onProductDeleted, setErrorMessage }) { //accepting props
     //Handling delete button click
     async function handleDelete() {
         try{
-            await axios.delete(`http://localhost:4000/products/${productId}`); // send delete request
+            await axios.delete(`${railsApiUrl}/${productId}`); // send delete request
             onProductDeleted(productId);
             setErrorMessage('');
         } catch (error) {

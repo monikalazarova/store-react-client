@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../styles/EditProduct.css";
+import { railsApiUrl } from './api';
 
 function EditProduct({ productId, onProductUpdated, onClose, setErrorMessage }) { // accept props
     //state for the product being edited
@@ -10,7 +11,7 @@ function EditProduct({ productId, onProductUpdated, onClose, setErrorMessage }) 
     useEffect(function() {
         async function fetchProduct() {
             try{
-                const response = await axios.get (`http://localhost:4000/products/${productId}`); // get request to fetch product details
+                const response = await axios.get (`${railsApiUrl}/${productId}`); // get request to fetch product details
                 setProduct(response.data);
             } catch (error) {
                 console.error ("Error fetching a product", error);
@@ -33,7 +34,7 @@ function EditProduct({ productId, onProductUpdated, onClose, setErrorMessage }) 
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = await axios.patch(`http://localhost:4000/products/${productId}`, { // Patch request to update the product
+            const response = await axios.patch(`${railsApiUrl}/${productId}`, { // Patch request to update the product
                 product: {
                     ...product,
                     available: product.available === true // ensure that is boolean
